@@ -85,7 +85,6 @@
     outline: 2px solid black;
   }
 
-  /* placeholder boxes where images go */
   .placeholder {
     width: 100%;
     aspect-ratio: 1;
@@ -199,8 +198,8 @@
   <h1>panapanapana</h1>
   <nav>
     <a href="#" class="active" onclick="showPage('drawings', this); return false;">drawings</a>
-    <a href="#" onclick="showPage('paintings', this); return false;">paintnings</a>
-    <a href="#" onclick="showPage('stories', this); return false;">storiez</a>
+    <a href="#" onclick="showPage('paintnings', this); return false;">paintnings</a>
+    <a href="#" onclick="showPage('storiez', this); return false;">storiez</a>
   </nav>
 </header>
 
@@ -209,34 +208,18 @@
   <div class="collections">
 
     <div class="collection">
-      <h2>V1</h2>
-      <div class="grid" id="drawings-1">
-        <!-- replace these with <img src="yourfile.jpg"> tags -->
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-      </div>
+      <h2>collection 1</h2>
+      <div class="grid" id="drawings-1"></div>
     </div>
 
     <div class="collection">
-      <h2>V2</h2>
-      <div class="grid" id="drawings-2">
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-      </div>
+      <h2>collection 2</h2>
+      <div class="grid" id="drawings-2"></div>
     </div>
 
     <div class="collection">
-      <h2>V3</h2>
-      <div class="grid" id="drawings-3">
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-      </div>
+      <h2>collection 3</h2>
+      <div class="grid" id="drawings-3"></div>
     </div>
 
   </div>
@@ -246,8 +229,8 @@
 <div class="page" id="page-paintnings">
   <div class="collections">
     <div class="collection">
-      <h2>paintings</h2>
-      <div class="grid" id="paintnings-1">
+      <h2>paintnings</h2>
+      <div class="grid" id="paintings-1">
         <div class="placeholder">image</div>
         <div class="placeholder">image</div>
         <div class="placeholder">image</div>
@@ -260,10 +243,9 @@
 </div>
 
 <!-- STORIEZ -->
-<div class="page" id="page-stories">
+<div class="page" id="page-storiez">
   <div id="stories-list-view">
     <div class="stories-list" id="stories-list">
-      <!-- Add your stories here. Copy this block for each one: -->
       <div class="story-item" onclick="openStory(0)">
         <p class="story-title">story title</p>
         <p class="story-meta">a sentence or two about it</p>
@@ -300,15 +282,28 @@ function showPage(name, link) {
   link.classList.add('active');
 }
 
+// --- COLLECTIONS ---
+function loadCollection(gridId, folder, count, start = 1) {
+  const grid = document.getElementById(gridId);
+  for (let i = start; i < start + count; i++) {
+    const num = String(i).padStart(3, '0');
+    const img = document.createElement('img');
+    img.src = `images/V/${folder}/${num}.jpg`;
+    img.alt = '';
+    grid.appendChild(img);
+  }
+}
+
+loadCollection('drawings-1', '01', 170);
+loadCollection('drawings-2', '02', 170, 171);
+loadCollection('drawings-3', '03', 22, 341);
+
 // --- LIGHTBOX ---
-// Attach lightbox to all real <img> tags inside .grid
-document.querySelectorAll('.grid').forEach(grid => {
-  grid.addEventListener('click', e => {
-    if (e.target.tagName === 'IMG') {
-      document.getElementById('lightbox-img').src = e.target.src;
-      document.getElementById('lightbox').classList.add('open');
-    }
-  });
+document.addEventListener('click', e => {
+  if (e.target.tagName === 'IMG' && e.target.closest('.grid')) {
+    document.getElementById('lightbox-img').src = e.target.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
 });
 
 function closeLightbox() {
@@ -320,7 +315,6 @@ document.addEventListener('keydown', e => {
 });
 
 // --- STORIEZ ---
-// Put your story content here
 const stories = [
   {
     title: "story title",
