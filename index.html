@@ -294,7 +294,7 @@ function loadCollection(gridId, folder, count, start = 1) {
   }
 }
 
-loadCollection('drawings-1', '01', 170);
+loadCollection('drawings-1', '01', 173);
 loadCollection('drawings-2', '02', 170, 171);
 loadCollection('drawings-3', '03', 22, 341);
 
@@ -317,9 +317,35 @@ document.addEventListener('keydown', e => {
 // --- STORIEZ ---
 const stories = [
   {
-    title: "story title",
-    meta: "a sentence or two about it",
-    body: `<p>Your story text goes here. Just paste it in between the backticks, replacing this paragraph.</p><p>You can have as many paragraphs as you want.</p>`
+    title: "Basically Something",
+    meta: "Basically there was a guy once",
+    body: `<p>Basically there was a guy once who was walking around somewhere. And he was very ugly (he had been told by some people). It was the consensus. So then at one point something happened, and then at some point he saw something which affected him. 
+
+What he saw was completely indescribable. It was a sublime manifestation of something itself. His heart was sweating. What he saw that day would never leave him the same way he was before to some extent. Pretty much it was something which really took him aback, like when you see something so interesting that it makes you stop to think. 
+
+And that's what the man did. He thought. He stood there for some time and thought about what he saw and then when it was getting awkward he walked away but the whole time he was walking away he was actually still thinking about that fateful encounter on that cold november morning day.
+
+And later when he went to his house. His house was not good and it was in a unrespectable neighbourhood. At his house he decided to make some dinner. And the dinner was his favourite thing to eat, but he would have to make it first. So he washed the dishes and collected the ingredients and then he followed the instructions and once the task was completed he went back to thinking back to what he saw that fateful day. And while he was eating, a decision had been made. He had to tell someone about it. 
+
+But who? The man stopped thinking about what he saw and started thinking about who to tell about it. On one hand there was his one friend but he was too boisterous to like the story. And in fact he could even go as far as to hit the man so he decided not to call that one. Then there was his other friend who was not boisterous but he did have tendencies of being facetious and the man thought it was not the best idea overall. Lastly there was another friend he had met once and she was neither boisterous nor facetious. But she was pretty busy. 
+
+So he scheduled an appointment in 45 days. It felt good knowing he would finally get it off his chest. 
+
+Then the phone rang, shattering the still fragile silence which layed it's icy dominion over the man's home. Turns out it was his friend who was very annoying. He would always ask too many questions which start with "to what extent" or "would it be reasonable to assume" or last but not least "is it beyond the scope of reality". He thought that with all these thinking questions he wouldn't have enough time to think about what he saw. So he was not looking forward to it. 
+
+Turns out they had planned to have dinner 45 days ago and he had forgotten. But he had already eaten dinner so he decided to go into the bathroom to vomit so he would have enough space in his stomach to have dinner with his annoying friend. While he was vomitting there was a little bit of blood which came out but it was within the acceptable limit of vomit blood. 
+
+All this vomiting was distracting the man from thinking about what he saw but nonetheless he got dressed with his attire and left his bad house. He walked through the detestable neighbourhood and entered the restaurant which smelled like a whole bunch of food. He sat at the same table as his friend. After telling eachother everything they had done the last 45 days the annoying friend went to the toilet for some reason and the man took the opportunity to stand up in the restaurant and look around. 
+
+By the time the friend came back it was already night time and that combined with all the thinking, vomiting and walking had made him tired. He decided to not listen to what his friend was saying and instead think about a song. Once the song was done playing in his head he pretended as if he had been listening to his friend the entire time but the fact that he had not responded appropriately to the conversation betrayed his sin of paying no attention and he felt the bubbling acid of guilt and shame flood his conscience. 
+
+Despite all that he slept well and awoke to a brand new day, full of potential, opportunities and mistakes along the way. That's the moral of this story. We should learn from our mistakes and not take things too hard. Because then you might make the same mistakes and feel bad and life in general is about feeling good. So next time you're thinking about something, just remember, it's not the path that guides us but rather it's us that guide our path. And if someone says like "oh it's not possible!" or "no you can't do it" you just have to say "no it is possible and i can do it actually" and "i will prove it". Because at the end of the day we are all the same, no matter if you are from different places or like different things or disagree on different subjects or know different things. It's all about not what you do but how you do it. 
+
+Think about it. 
+
+The End. 
+
+It was a little boy who had run away from his mother and tried to give his shoes to a refugee who was playing the violin in the park but the shoes didn't fit so he took them back and went back to his mother.</p>`
   },
   {
     title: "another story",
@@ -333,10 +359,14 @@ const stories = [
   }
 ];
 
+function toParagraphs(text) {
+  return text.trim().split(/\n\s*\n/).map(p => `<p>${p.trim()}</p>`).join('');
+}
+
 function openStory(i) {
   const s = stories[i];
   document.getElementById('story-reader-title').textContent = s.title;
-  document.getElementById('story-reader-body').innerHTML = s.body;
+  document.getElementById('story-reader-body').innerHTML = toParagraphs(s.body);
   document.getElementById('stories-list-view').style.display = 'none';
   document.getElementById('story-reader').classList.add('active');
 }
