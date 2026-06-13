@@ -230,14 +230,7 @@
   <div class="collections">
     <div class="collection">
       <h2>paintnings</h2>
-      <div class="grid" id="paintings-1">
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-        <div class="placeholder">image</div>
-      </div>
+      <div class="grid" id="paintings-1"></div>
     </div>
   </div>
 </div>
@@ -351,12 +344,12 @@ function showPage(name, link) {
 }
 
 // --- COLLECTIONS ---
-function loadCollection(gridId, folder, count, start = 1) {
+function loadCollection(gridId, folder, count, start = 1, basePath = 'images/V') {
   const grid = document.getElementById(gridId);
   for (let i = start; i < start + count; i++) {
     const num = String(i).padStart(3, '0');
     const img = document.createElement('img');
-    img.src = `images/V/${folder}/${num}.jpg`;
+    img.src = `${basePath}/${folder}/${num}.jpg`;
     img.alt = '';
     grid.appendChild(img);
   }
@@ -365,6 +358,7 @@ function loadCollection(gridId, folder, count, start = 1) {
 loadCollection('drawings-1', '01', 170);
 loadCollection('drawings-2', '02', 170, 171);
 loadCollection('drawings-3', '03', 22, 341);
+loadCollection('paintings-1', '', 55, 1, 'images/paintnings');
 
 // --- LIGHTBOX ---
 document.addEventListener('click', e => {
